@@ -120,7 +120,7 @@ RUN sed -i \
         -e "s/^expose_php.*/expose_php = Off/" \
         -e "s/^;date.timezone.*/date.timezone = UTC/" \
         -e "s/^memory_limit.*/memory_limit = -1/" \
-        -e "s/^max_execution_time.*/max_execution_time = 300/" \
+        -e "s/^max_execution_time.*/max_execution_time = 600/" \
         -e "s/^post_max_size.*/post_max_size = 512M/" \
         -e "s/^upload_max_filesize.*/upload_max_filesize = 512M/" \
         -e "s/^error_reporting.*/error_reporting = E_ALL/" \
