@@ -1,6 +1,10 @@
 FROM alpine:3.4
 MAINTAINER Wodby <admin@wodby.com>
 
+# Create user www-data
+# RUN addgroup -g 82 -S www-data && \
+#    adduser -u 82 -D -S -G www-data www-data
+
 # Install packages
 RUN echo 'http://alpine.gliderlabs.com/alpine/v3.4/main' > /etc/apk/repositories && \
     echo 'http://alpine.gliderlabs.com/alpine/v3.4/community' >> /etc/apk/repositories && \
