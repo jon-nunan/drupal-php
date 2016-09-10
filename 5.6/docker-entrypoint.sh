@@ -10,4 +10,4 @@ if [ "$PHP_XDEBUG_ENABLED" -eq "1" ]; then
      sed -i 's/^;zend_extension.*/zend_extension = xdebug.so/' /etc/php5/conf.d/xdebug.ini
 fi
 
-exec php-fpm
+exec php-fpm -R
