@@ -2,8 +2,8 @@ FROM alpine:3.4
 MAINTAINER Wodby <admin@wodby.com>
 
 # Create user www-data
-RUN addgroup -g 82 -S www-data && \
-    adduser -u 82 -D -S -G www-data www-data
+# RUN addgroup -g 82 -S www-data && \
+#    adduser -u 82 -D -S -G www-data www-data
 
 # Install packages
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
