@@ -59,7 +59,6 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-imap@community \
         php7-soap@community \
         php7-dev@community \
-        php7-memcached@testing \
         php7-pear@community \
         php7-redis@testing \
         php7-mbstring@community \
