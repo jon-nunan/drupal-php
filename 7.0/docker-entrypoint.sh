@@ -22,4 +22,4 @@ if [ -n "$PHP_XDEBUG_REMOTE_HOST" ]; then
      sed -i 's/^xdebug.remote_host.*/'"xdebug.remote_host = ${PHP_XDEBUG_REMOTE_HOST}"'/' /etc/php7/conf.d/00_xdebug.ini
 fi
 
-exec php-fpm
+exec php-fpm -R
