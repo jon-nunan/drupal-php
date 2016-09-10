@@ -60,7 +60,6 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-imap@community \
         php7-soap@community \
         php7-dev@community \
-        php7-memcached@testing \
         php7-pear@community \
         php7-redis@testing \
         php7-mbstring@community \
