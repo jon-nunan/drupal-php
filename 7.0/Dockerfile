@@ -131,7 +131,7 @@ RUN pecl install mongodb
 # install xhgui
 RUN git clone https://github.com/perftools/xhgui.git /xhgui
 
-# configure xhgui symply adding config file to container
+# configure xhgui simply adding config file to container
 ADD ./xhgui.config.php /xhgui/config/config.php
 
 # Configure php.ini
