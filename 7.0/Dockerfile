@@ -118,10 +118,21 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     cp /root/.console/config.yml /home/www-data/.console/ && \
     chown -R 82:82 /home/www-data && \
 
+
+
     # Cleanup
     apk del --purge *-dev build-base autoconf libtool && \
     rm -rf /usr/include/php /usr/lib/php/build && \
     rm -rf /var/cache/apk/*
+
+# install mongodb extension for xhgui
+RUN pecl install mongodb
+
+# install xhgui
+RUN git clone https://github.com/perftools/xhgui.git /xhgui
+
+# configure xhgui symply adding config file to container
+ADD ./xhgui.config.php /xhgui/config/config.php
 
 # Configure php.ini
 RUN sed -i \
@@ -150,11 +161,11 @@ RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
 # Create work dir
-RUN mkdir -p /var/www/html && chown -R 82:82 /var/www
+RUN mkdir -p /var/www/html
 WORKDIR /var/www/html
 VOLUME /var/www/html
 
 EXPOSE 9000
-
+CMD composer install -d /xhgui
 COPY docker-entrypoint.sh /usr/local/bin/
 CMD "docker-entrypoint.sh"
