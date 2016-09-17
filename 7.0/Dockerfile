@@ -107,6 +107,8 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     curl https://drupalconsole.com/installer -o /usr/local/bin/drupal && \
     chmod +x /usr/local/bin/drupal && \
 
+
+
     # Cleanup
     apk del --purge \
         *-dev \
@@ -121,6 +123,15 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         /var/cache/apk/* \
         /tmp/* \
         /root/.composer
+
+# install mongodb extension for xhgui
+RUN pecl install mongodb
+
+# install xhgui
+RUN git clone https://github.com/perftools/xhgui.git /xhgui
+
+# configure xhgui symply adding config file to container
+ADD ./xhgui.config.php /xhgui/config/config.php
 
 # Configure php.ini
 RUN sed -i \
@@ -153,19 +164,18 @@ RUN addgroup -g 82 -S www-data && \
 	adduser -u 82 -D -S -G www-data www-data
 
 # Create work dir
-RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www
+RUN mkdir -p /var/www/html
 
 WORKDIR /var/www/html
 VOLUME /var/www/html
 EXPOSE 9000
 
 # Init www-data user
-USER www-data
+
 RUN composer global require hirak/prestissimo:^0.3 --optimize-autoloader && \
     rm -rf ~/.composer/.cache && \
     drupal init --override
 
-USER root
+CMD composer install -d /xhgui
 COPY docker-entrypoint.sh /usr/local/bin/
 CMD docker-entrypoint.sh
