@@ -131,9 +131,6 @@ RUN pecl install mongodb
 # install xhgui
 RUN git clone https://github.com/perftools/xhgui.git /xhgui
 
-# configure xhgui simply adding config file to container
-ADD ./xhgui.config.php /xhgui/config/config.php
-
 # Configure php.ini
 RUN sed -i \
         -e "s/^expose_php.*/expose_php = Off/" \
@@ -155,7 +152,8 @@ RUN rm /etc/php7/conf.d/xdebug.ini
 COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
-
+# configure xhgui simply adding config file to container
+COPY xhgui.config.php /xhgui/config/config.php
 # Add default drush aliases
 RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
