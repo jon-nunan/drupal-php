@@ -95,10 +95,21 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     make && make install && \
     echo 'extension=tideways.so' >> /etc/php7/conf.d/20_tideways.ini && \
     echo 'tideways.auto_prepend_library=0' >> /etc/php7/conf.d/20_tideways.ini && \
-    echo 'auto_prepend_file=/xhgui/external/header.php' >> /etc/php7/conf.d/20_tideways.ini && \
+
+    # Install XHGui
+    git clone https://github.com/perftools/xhgui.git /var/www/xhgui; \
+    chmod -R 0777 /var/www/xhgui/cache; \
+    cd /var/www/xhgui/ && php install.php; \
+    sed -i -e '$a\
+    [xhgui]\
+    auto_prepend_file = "/var/www/xhgui/external/header.php"' \
+    /usr/local/etc/php/php.ini
+
+    COPY core/xhgui/config.php /var/www/xhgui/config/
+
 
     # Install composer
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 
     # Add composer parallel install plugin
     composer global require "hirak/prestissimo:^0.3" && \
