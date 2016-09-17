@@ -93,8 +93,8 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     cd /usr/local/src/php-profiler && \
     phpize7 && ./configure --with-php-config=/usr/bin/php-config7 && \
     make && make install && \
-    echo 'extension=tideways.so' > /etc/php7/conf.d/20_tideaways.ini && \
-    echo 'tideways.auto_prepend_library=0' > /etc/php7/conf.d/20_tideaways.ini && \
+    echo 'extension=tideways.so' >> /etc/php7/conf.d/20_tideaways.ini && \
+    echo 'tideways.auto_prepend_library=0' >> /etc/php7/conf.d/20_tideaways.ini && \
 
     # Install composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
