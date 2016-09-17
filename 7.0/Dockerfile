@@ -103,7 +103,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     sed -i -e '$a\
     [xhgui]\
     auto_prepend_file = "/var/www/xhgui/external/header.php"' \
-    /usr/local/etc/php/php.ini
+    /etc/php7/conf.d/20_tideways.ini
 
     COPY core/xhgui/config.php /var/www/xhgui/config/
 
