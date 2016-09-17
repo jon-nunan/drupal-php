@@ -95,6 +95,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     make && make install && \
     echo 'extension=tideways.so' >> /etc/php7/conf.d/20_tideaways.ini && \
     echo 'tideways.auto_prepend_library=0' >> /etc/php7/conf.d/20_tideaways.ini && \
+    echo 'auto_prepend_file=/xhgui/external/header.php
 
     # Install composer
     curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer && \
