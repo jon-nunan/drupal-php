@@ -89,7 +89,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     cd .. && rm -rf ./master.zip ./uploadprogress-master && \
 
     # Install Tideaways profiler
-    git clone -b php-profiler https://github.com/tideways/php-profiler-extension.git /usr/local/src/php-profiler && \
+    git clone https://github.com/tideways/php-profiler-extension.git /usr/local/src/php-profiler && \
     cd /usr/local/src/php-profiler && \
     phpize7 && ./configure --with-php-config=/usr/bin/php-config7 && \
     make && make install && \
