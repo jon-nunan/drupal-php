@@ -105,7 +105,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     auto_prepend_file = "/var/www/xhgui/external/header.php"' \
     /etc/php7/conf.d/20_tideways.ini
 
-    COPY core/xhgui/config.php /var/www/xhgui/config/
+    COPY xhgui/config.php /var/www/xhgui/config/
 
 
     # Install composer
