@@ -168,9 +168,9 @@ RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
 
 # Create work dir
-RUN mkdir -p /var/www/html
-WORKDIR /var/www/html
-VOLUME /var/www/html
+RUN mkdir -p /var/www/fc/html
+WORKDIR /var/www/fc/html
+VOLUME /var/www/fc/html
 
 EXPOSE 9000
 CMD composer install -d /xhgui
