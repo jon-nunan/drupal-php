@@ -103,13 +103,10 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     sed -i -e '$a\
     [xhgui]\
     auto_prepend_file = "/var/www/xhgui/external/header.php"' \
-    /etc/php7/conf.d/20_tideways.ini
-
-    COPY xhgui/config.php /var/www/xhgui/config/
-
+    /etc/php7/conf.d/20_tideways.ini && \
 
     # Install composer
-    RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 
     # Add composer parallel install plugin
     composer global require "hirak/prestissimo:^0.3" && \
@@ -165,7 +162,7 @@ COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
 # configure xhgui simply adding config file to container
-COPY xhgui.config.php /xhgui/config/config.php
+COPY xhgui/config.php /var/www/xhgui/config/
 # Add default drush aliases
 RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
