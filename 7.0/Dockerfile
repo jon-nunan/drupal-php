@@ -119,8 +119,6 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     curl https://drupalconsole.com/installer -o /usr/local/bin/drupal && \
     chmod +x /usr/local/bin/drupal && \
 
-
-
     # Cleanup
     apk del --purge \
         *-dev \
@@ -135,6 +133,12 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         /var/cache/apk/* \
         /tmp/* \
         /root/.composer
+
+# install mongodb extension for xhgui
+RUN pecl install mongodb
+
+# install xhgui
+RUN git clone https://github.com/perftools/xhgui.git /xhgui
 
 # install mongodb extension for xhgui
 RUN pecl install mongodb
@@ -175,7 +179,6 @@ RUN addgroup -g 82 -S www-data && \
 
 # Create work dir
 RUN mkdir -p /var/www/html
-
 WORKDIR /var/www/html
 VOLUME /var/www/html
 EXPOSE 9000
