@@ -161,8 +161,7 @@ RUN sed -i \
 COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
-# configure xhgui simply adding config file to container
-COPY xhgui/config.php /var/www/xhgui/config/
+
 # Add default drush aliases
 RUN mkdir -p /etc/drush/site-aliases
 COPY default.aliases.drushrc.php /etc/drush/site-aliases/
@@ -184,5 +183,7 @@ RUN composer global require hirak/prestissimo:^0.3 --optimize-autoloader && \
     drupal init --override
 
 CMD composer install -d /xhgui
+# configure xhgui simply adding config file to container
+COPY xhgui/config.php /var/www/xhgui/config/
 COPY docker-entrypoint.sh /usr/local/bin/
 CMD docker-entrypoint.sh
