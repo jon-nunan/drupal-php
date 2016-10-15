@@ -99,15 +99,6 @@ RUN rm /etc/php7/conf.d/xdebug.ini && \
     echo 'extension=tideways.so' >> /etc/php7/conf.d/20_tideways.ini && \
     echo 'tideways.auto_prepend_library=0' >> /etc/php7/conf.d/20_tideways.ini
 
-    # Install XHGui
-RUN git clone https://github.com/perftools/xhgui.git /var/www/xhgui; \
-    chmod -R 0777 /var/www/xhgui/cache; \
-    cd /var/www/xhgui/ && php install.php; \
-    sed -i -e '$a\
-    [xhgui]\
-    auto_prepend_file = "/var/www/xhgui/external/header.php"' \
-    /etc/php7/conf.d/20_tideways.ini
-
     # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 
