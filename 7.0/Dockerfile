@@ -75,38 +75,38 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     # Install imagick
     sed -ie 's/-n//g' /usr/bin/pecl && \
     yes | pecl install imagick && \
-    echo 'extension=imagick.so' > /etc/php7/conf.d/imagick.ini && \
+    echo 'extension=imagick.so' > /etc/php7/conf.d/imagick.ini
 
     # Install uploadprogess
-    cd /tmp/ && wget https://github.com/Jan-E/uploadprogress/archive/master.zip && \
+RUN cd /tmp/ && wget https://github.com/Jan-E/uploadprogress/archive/master.zip && \
     unzip master.zip && \
     cd uploadprogress-master/ && \
     phpize7 && ./configure --with-php-config=/usr/bin/php-config7 && \
     make && make install && \
     echo 'extension=uploadprogress.so' > /etc/php7/conf.d/20_uploadprogress.ini && \
-    cd .. && rm -rf ./master.zip ./uploadprogress-master && \
+    cd .. && rm -rf ./master.zip ./uploadprogress-master
 
     # Disable Xdebug
-    rm /etc/php7/conf.d/xdebug.ini && \
+RUN rm /etc/php7/conf.d/xdebug.ini && \
     # Install Tideaways profiler
     git clone https://github.com/tideways/php-profiler-extension.git /usr/local/src/php-profiler && \
     cd /usr/local/src/php-profiler && \
     phpize7 && ./configure --with-php-config=/usr/bin/php-config7 && \
     make && make install && \
     echo 'extension=tideways.so' >> /etc/php7/conf.d/20_tideways.ini && \
-    echo 'tideways.auto_prepend_library=0' >> /etc/php7/conf.d/20_tideways.ini && \
+    echo 'tideways.auto_prepend_library=0' >> /etc/php7/conf.d/20_tideways.ini
 
     # Install XHGui
-    git clone https://github.com/perftools/xhgui.git /var/www/xhgui; \
+RUN git clone https://github.com/perftools/xhgui.git /var/www/xhgui; \
     chmod -R 0777 /var/www/xhgui/cache; \
     cd /var/www/xhgui/ && php install.php; \
     sed -i -e '$a\
     [xhgui]\
     auto_prepend_file = "/var/www/xhgui/external/header.php"' \
-    /etc/php7/conf.d/20_tideways.ini && \
+    /etc/php7/conf.d/20_tideways.ini
 
     # Install composer
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 
     # Add composer parallel install plugin
     composer global require "hirak/prestissimo:^0.3" && \
