@@ -184,6 +184,6 @@ RUN composer global require hirak/prestissimo:^0.3 --optimize-autoloader && \
 
 CMD composer install -d /xhgui
 # configure xhgui simply adding config file to container
-COPY xhgui/config.php /var/www/xhgui/config/
+COPY xhgui-conf/config.php /var/www/xhgui/config/
 COPY docker-entrypoint.sh /usr/local/bin/
 CMD docker-entrypoint.sh
