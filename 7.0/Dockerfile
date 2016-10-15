@@ -128,17 +128,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
         /tmp/* \
         /root/.composer
 
-# install mongodb extension for xhgui
-RUN pecl install mongodb
-
-# install xhgui
-RUN git clone https://github.com/perftools/xhgui.git /xhgui
-
-# install mongodb extension for xhgui
-RUN pecl install mongodb
-
-# install xhgui
-RUN git clone https://github.com/perftools/xhgui.git /xhgui
 
 # Configure php.ini
 RUN sed -i \
